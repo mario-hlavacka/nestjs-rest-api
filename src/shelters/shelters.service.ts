@@ -1,16 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CreateShelterDto } from './dto/create-shelter.dto';
 import { UpdateShelterDto } from './dto/update-shelter.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Shelter } from './entities/shelter.entity';
-import { Repository } from 'typeorm';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class SheltersService {
-  constructor(
-    @InjectRepository(Shelter)
-    private sheltersRepository: Repository<Shelter>,
-  ) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   create(createShelterDto: CreateShelterDto) {
     return 'This action adds a new shelter';

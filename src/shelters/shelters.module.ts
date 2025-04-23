@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { SheltersService } from './shelters.service';
 import { SheltersController } from './shelters.controller';
-import { Shelter } from './entities/shelter.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { PrismaService } from 'src/prisma.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Shelter])],
+  imports: [ConfigModule.forRoot()],
   controllers: [SheltersController],
-  providers: [SheltersService],
+  providers: [SheltersService, PrismaService],
 })
 export class SheltersModule {}

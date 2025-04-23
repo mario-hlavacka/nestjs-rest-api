@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ContributionsService } from './contributions.service';
 import { ContributionsController } from './contributions.controller';
-import { Contribution } from './entities/contribution.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { PrismaService } from 'src/prisma.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Contribution])],
+  imports: [ConfigModule.forRoot()],
   controllers: [ContributionsController],
-  providers: [ContributionsService],
+  providers: [ContributionsService, PrismaService],
 })
 export class ContributionsModule {}
