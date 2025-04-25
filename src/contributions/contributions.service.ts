@@ -5,10 +5,10 @@ import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class ContributionsService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   create(createContributionDto: CreateContributionDto) {
-    return 'This action adds a new contribution';
+    return this.prisma.contribution.create({ data: createContributionDto });
   }
 
   findAll() {

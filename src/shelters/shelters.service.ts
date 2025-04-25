@@ -5,14 +5,14 @@ import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class SheltersService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   create(createShelterDto: CreateShelterDto) {
     return 'This action adds a new shelter';
   }
 
   findAll() {
-    return `This action returns all shelters`;
+    return this.prisma.shelter.findMany();
   }
 
   findOne(id: number) {
