@@ -7,6 +7,6 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [ConfigModule.forRoot()],
   controllers: [SheltersController],
-  providers: [SheltersService, PrismaService],
+  providers: [SheltersService, PrismaService]
 })
 export class SheltersModule {}

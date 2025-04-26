@@ -16,7 +16,7 @@ export class SheltersService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} shelter`;
+    return this.prisma.shelter.findUnique(({ where: { id: Number(id) } }));
   }
 
   update(id: number, updateShelterDto: UpdateShelterDto) {
