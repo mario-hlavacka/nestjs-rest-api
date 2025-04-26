@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class SheltersService {
@@ -10,6 +10,6 @@ export class SheltersService {
   }
 
   async findOne(id: number) {
-    return await this.prisma.shelter.findUnique(({ where: { id: id } }));
+    return await this.prisma.shelter.findUnique({ where: { id: id } });
   }
 }

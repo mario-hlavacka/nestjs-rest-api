@@ -14,7 +14,7 @@ export class SheltersController {
   async findOne(@Param('id') id: string) {
     const shelter = await this.sheltersService.findOne(+id);
 
-    if(!shelter) {
+    if (!shelter) {
       throw new NotFoundException();
     }
 
