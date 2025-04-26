@@ -16,6 +16,6 @@ describe('ContributionsController', () => {
   });
 
   it('should be defined', () => {
-    expect(controller).toBeUndefined();
+    expect(controller).toBeDefined();
   });
 });
