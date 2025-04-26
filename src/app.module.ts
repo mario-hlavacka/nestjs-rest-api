@@ -5,11 +5,7 @@ import { ContributionsModule } from './contributions/contributions.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [
-    SheltersModule,
-    ContributionsModule,
-    ConfigModule.forRoot()
-  ],
+  imports: [SheltersModule, ContributionsModule, ConfigModule.forRoot()],
   controllers: [AppController],
   providers: [],
 })

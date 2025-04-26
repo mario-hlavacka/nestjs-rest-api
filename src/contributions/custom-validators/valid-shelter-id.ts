@@ -1,13 +1,22 @@
-import { Injectable } from "@nestjs/common";
-import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
-import { SheltersService } from "src/shelters/shelters.service";
+import { Injectable } from '@nestjs/common';
+import {
+  registerDecorator,
+  ValidationArguments,
+  ValidationOptions,
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+} from 'class-validator';
+import { SheltersService } from '../../shelters/shelters.service';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
 export class ValidShelterIdConstraint implements ValidatorConstraintInterface {
   constructor(private readonly sheltersService: SheltersService) {}
 
-  async validate(shelterId: number, args: ValidationArguments):Promise<boolean>  {
+  async validate(
+    shelterId: number,
+    args: ValidationArguments,
+  ): Promise<boolean> {
     const shelter = await this.sheltersService.findOne(shelterId);
     return !!shelter;
   }
@@ -18,7 +27,7 @@ export class ValidShelterIdConstraint implements ValidatorConstraintInterface {
 }
 
 export function ValidShelterId(validationOptions?: ValidationOptions) {
-  return function (object: Object, propertyName: string) {
+  return function (object: object, propertyName: string) {
     registerDecorator({
       name: 'ValidShelterId',
       target: object.constructor,

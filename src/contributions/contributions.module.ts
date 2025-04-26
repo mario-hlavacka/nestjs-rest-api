@@ -9,6 +9,11 @@ import { SheltersService } from 'src/shelters/shelters.service';
 @Module({
   imports: [ConfigModule.forRoot()],
   controllers: [ContributionsController],
-  providers: [ContributionsService, PrismaService, SheltersService, ValidShelterIdConstraint],
+  providers: [
+    ContributionsService,
+    PrismaService,
+    SheltersService,
+    ValidShelterIdConstraint,
+  ],
 })
 export class ContributionsModule {}
