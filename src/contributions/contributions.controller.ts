@@ -10,7 +10,7 @@ export class ContributionsController {
 
   @Post()
   @ApiCreatedResponse({ type: ContributionEntity })
-  async create(@Body() createContributionDto: CreateContributionDto) {
-    return await this.contributionsService.create(createContributionDto);
+  create(@Body() createContributionDto: CreateContributionDto) {
+    return this.contributionsService.create(createContributionDto);
   }
 }

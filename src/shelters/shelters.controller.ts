@@ -6,8 +6,8 @@ export class SheltersController {
   constructor(private readonly sheltersService: SheltersService) {}
 
   @Get()
-  async findAll() {
-    return await this.sheltersService.findAll();
+  findAll() {
+    return this.sheltersService.findAll();
   }
 
   @Get(':id')

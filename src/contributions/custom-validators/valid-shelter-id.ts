@@ -15,7 +15,7 @@ export class ValidShelterIdConstraint implements ValidatorConstraintInterface {
 
   async validate(
     shelterId: number,
-    args: ValidationArguments,
+    args?: ValidationArguments,
   ): Promise<boolean> {
     const shelter = await this.sheltersService.findOne(shelterId);
     return !!shelter;

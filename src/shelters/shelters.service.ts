@@ -6,10 +6,12 @@ export class SheltersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAll() {
-    return this.prisma.shelter.findMany();
+    return await this.prisma.shelter.findMany();
   }
 
   async findOne(id: number) {
-    return await this.prisma.shelter.findUnique({ where: { id: id } });
+    return await this.prisma.shelter.findUnique({
+      where: { id: id },
+    });
   }
 }
