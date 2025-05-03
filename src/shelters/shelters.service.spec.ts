@@ -1,6 +1,6 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { PrismaService } from "../../src/prisma.service";
-import { SheltersService } from "./shelters.service";
+import { Test, TestingModule } from '@nestjs/testing';
+import { PrismaService } from '../../src/prisma.service';
+import { SheltersService } from './shelters.service';
 
 describe('SheltersService', () => {
   let service: SheltersService;
@@ -8,15 +8,19 @@ describe('SheltersService', () => {
   const mockShelters = [
     { id: 1, name: 'Žilinský útulok o.z.' },
     { id: 2, name: 'Trenčiansky Útulok' },
-    { id: 3, name: 'HAFKÁČI' }
+    { id: 3, name: 'HAFKÁČI' },
   ];
   const mockPrismaService = {
     shelter: {
       findMany: jest.fn().mockResolvedValue(mockShelters),
-      findUnique: jest.fn().mockImplementation((args) => Promise.resolve(
-        mockShelters.find(shelter => shelter.id === args.where.id)
-      ))
-    }
+      findUnique: jest
+        .fn()
+        .mockImplementation((args) =>
+          Promise.resolve(
+            mockShelters.find((shelter) => shelter.id === args.where.id),
+          ),
+        ),
+    },
   };
 
   beforeEach(async () => {
@@ -44,8 +48,12 @@ describe('SheltersService', () => {
   it('should return one specific shelter', async () => {
     const shelterId = 2;
     const result = await service.findOne(shelterId);
-    
-    expect(result).toEqual(mockShelters.find(shelter => shelter.id === shelterId));
-    expect(mockPrismaService.shelter.findUnique).toHaveBeenCalledWith({ where: { id: shelterId } });
+
+    expect(result).toEqual(
+      mockShelters.find((shelter) => shelter.id === shelterId),
+    );
+    expect(mockPrismaService.shelter.findUnique).toHaveBeenCalledWith({
+      where: { id: shelterId },
+    });
   });
 });

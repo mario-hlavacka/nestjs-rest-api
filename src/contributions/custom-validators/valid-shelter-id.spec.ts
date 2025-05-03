@@ -1,6 +1,6 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { ValidShelterIdConstraint } from "./valid-shelter-id";
-import { SheltersService } from "../../../src/shelters/shelters.service";
+import { Test, TestingModule } from '@nestjs/testing';
+import { ValidShelterIdConstraint } from './valid-shelter-id';
+import { SheltersService } from '../../../src/shelters/shelters.service';
 
 describe('ValidShelterId', () => {
   let validator: ValidShelterIdConstraint;
@@ -9,22 +9,24 @@ describe('ValidShelterId', () => {
   const mockShelters = [
     { id: 1, name: 'Žilinský útulok o.z.' },
     { id: 2, name: 'Trenčiansky Útulok' },
-    { id: 3, name: 'HAFKÁČI' }
+    { id: 3, name: 'HAFKÁČI' },
   ];
   const mockSheltersService = {
-    findOne: jest.fn().mockImplementation((id) => Promise.resolve(
-      mockShelters.find(shelter => shelter.id === id)
-    ))
+    findOne: jest
+      .fn()
+      .mockImplementation((id) =>
+        Promise.resolve(mockShelters.find((shelter) => shelter.id === id)),
+      ),
   };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [SheltersService]
+      providers: [SheltersService],
     })
       .overrideProvider(SheltersService)
       .useValue(mockSheltersService)
       .compile();
-    
+
     sheltersService = module.get<SheltersService>(SheltersService);
     validator = new ValidShelterIdConstraint(sheltersService);
   });
@@ -40,5 +42,4 @@ describe('ValidShelterId', () => {
     const result = await validator.validate(shelterId);
     expect(result).toBe(false);
   });
-
 });

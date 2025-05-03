@@ -11,7 +11,7 @@ export class SheltersService {
 
   async findOne(id: number) {
     return await this.prisma.shelter.findUnique({
-       where: { id: id } 
+      where: { id: id },
     });
   }
 }
