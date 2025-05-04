@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  run-migrations-seed:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://postgres:mysecretpassword@db:5432/postgres?schema=public
+    command: sh -c "npx prisma migrate deploy && npx prisma db seed"
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:      
+      run-migrations-seed:        
+        condition: service_completed_successfully
+    environment:
+      - DATABASE_URL=postgresql://postgres:mysecretpassword@db:5432/postgres?schema=public
+
+volumes:
+  postgres_data:
