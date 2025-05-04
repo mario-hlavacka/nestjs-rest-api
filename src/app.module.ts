@@ -6,7 +6,12 @@ import { ConfigModule } from '@nestjs/config';
 import { HealthModule } from './health/health.module';
 
 @Module({
-  imports: [SheltersModule, ContributionsModule, HealthModule, ConfigModule.forRoot()],
+  imports: [
+    SheltersModule,
+    ContributionsModule,
+    HealthModule,
+    ConfigModule.forRoot(),
+  ],
   controllers: [AppController],
   providers: [],
 })
