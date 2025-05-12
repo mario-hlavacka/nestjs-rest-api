@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { useContainer } from 'class-validator';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,6 +17,13 @@ async function bootstrap() {
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
+
+  const configService = app.get(ConfigService);
+  const allowedOrigin = configService.get<string>('FRONTEND_URL');
+  app.enableCors({
+    origin: allowedOrigin,
+    methods: 'GET,POST',
+  });
 
   await app.listen(process.env.PORT ?? 3000);
 }
