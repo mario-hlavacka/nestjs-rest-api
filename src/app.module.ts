@@ -10,9 +10,7 @@ import { HealthModule } from './health/health.module';
     SheltersModule,
     ContributionsModule,
     HealthModule,
-    ConfigModule.forRoot({
-      isGlobal: true
-    }),
+    ConfigModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [],
